@@ -83,16 +83,17 @@ def get_best_shelter(victim_details, top=1):
     )  # Approximate distance squared (Euclidean-like for simplicity)
 
     query = Q()
+    print(victim_details)
 
-    if len(victim_details['medical_facilities_names']):
-        query|= Q(medical_facilities__name__in=victim_details['medical_facilities_names'])
+    if len(victim_details['medical_facilities']):
+        query|= Q(medical_facilities_available__in=victim_details['medical_facilities'])
     
-    if len(victim_details['resources_names']):
-        query|= Q(resources__name__in=victim_details['resources_names'])
+    if len(victim_details['resources']):
+        query|= Q(resources_available__in=victim_details['resources'])
     
 
     shelters = Shelter.objects.annotate(distance=a).filter(Q(Q(query) & Q(isFull=False))).distinct().order_by('distance')[:top]
-    print(shelters)
+    print(shelters[0].distance)
     return shelters
 
 

@@ -51,8 +51,8 @@ class VictimSerializer(serializers.ModelSerializer):
         fields = '__all__' 
 
 class VictimDetailsSerializer(serializers.Serializer):
-    medical_facilities_names = serializers.ListField()
-    resources_names = serializers.ListField()
+    medical_facilities = serializers.ListField()
+    resources = serializers.ListField()
     latitude = serializers.FloatField()
     longitude = serializers.FloatField()
     

@@ -76,6 +76,7 @@ class BestShelterView(APIView):
                     shelters_serializer = ShelterSerializer(shelters[0])
                 else:
                     shelters_serializer = ShelterSerializer(shelters, many=True)
+                    print(shelters_serializer.data)
                 return Response(shelters_serializer.data, status=status.HTTP_200_OK)
             return Response(None, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
